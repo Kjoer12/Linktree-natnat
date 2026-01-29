@@ -39,23 +39,3 @@ function draw() {
 }
 
 setInterval(draw, 40);
-
-const toggle = document.getElementById("theme-toggle");
-
-// cek mode terakhir
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light");
-  toggle.textContent = "☀️";
-}
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-
-  if (document.body.classList.contains("light")) {
-    toggle.textContent = "☀️";
-    localStorage.setItem("theme", "light");
-  } else {
-    toggle.textContent = "🌙";
-    localStorage.setItem("theme", "dark");
-  }
-});

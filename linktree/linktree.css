@@ -3,158 +3,174 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", system-ui, Arial, sans-serif;
+}
+
+/* ================= THEME VARIABLES ================= */
+:root {
+  --bg: #020617;
+  --card: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+}
+
+body.light {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0ea5e9;
 }
 
 /* ================= BODY ================= */
 body {
   min-height: 100vh;
+  background: radial-gradient(circle at top, var(--card), var(--bg));
+  color: var(--text);
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  background: url("https://images.unsplash.com/photo-1503264116251-35a269479413")
-    center / cover no-repeat fixed;
-
-  color: #e5e7eb;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* ================= LIGHT MODE ================= */
-body.light {
-  background: #f8fafc;
-  color: #0f172a;
-}
-
-body.light .container-intro p,
-body.light .container-footer p {
-  color: #475569;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* ================= INTRO ================= */
 .container-intro {
+  margin-top: 50px;
   text-align: center;
-  padding: 40px 20px;
+  padding: 0 20px;
 }
 
 .container-intro h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 26px;
+  letter-spacing: 1px;
 }
 
 .container-intro p {
-  color: #9ca3af;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
 /* ================= PROFILE ================= */
 .profile {
-  position: relative;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  margin-top: 25px;
 }
 
 .profile img {
   width: 120px;
   height: 120px;
-  object-fit: cover;
   border-radius: 50%;
-
-  background: #111;
-  border: 4px solid #5865f2;
-  box-shadow: 0 0 25px rgba(88, 101, 242, 0.7);
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
 }
 
 /* ================= THEME TOGGLE ================= */
 #theme-toggle {
   position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 10000;
-
-  background: none;
+  top: 20px;
+  right: 20px;
+  background: var(--card);
   border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
   cursor: pointer;
-  font-size: 1.5rem;
+  color: var(--text);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
 }
 
 /* ================= CONTENT ================= */
 .container-content {
   width: 100%;
-  max-width: 400px;
-  padding: 20px;
+  max-width: 480px;
+  margin-top: 35px;
+  padding: 0 20px;
 }
 
-/* ================= BUTTONS ================= */
 .btn {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
+/* ================= BUTTON LINK ================= */
 .btn a {
   display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 15px;
-
-  padding: 14px;
-  border-radius: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--text);
   text-decoration: none;
-
-  color: #fff;
-  font-weight: bold;
-
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: all 0.35s ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
 .btn a:hover {
-  transform: scale(1.03);
-  opacity: 0.9;
+  transform: translateY(-4px);
 }
 
+/* ICON */
 .btn a i {
-  font-size: 1.8rem;
+  font-size: 28px;
+  width: 32px;
 }
 
-.btn a .text span {
-  font-size: 1rem;
-  font-weight: bold;
+/* TEXT */
+.text span {
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.btn a .text p {
-  font-size: 0.8rem;
-  opacity: 0.9;
+.text p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
 }
 
-/* ================= BUTTON COLORS ================= */
-.instagram {
-  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
-}
+/* ================= BRAND COLORS ================= */
+.instagram i { color: #e1306c; }
+.discord i { color: #5865f2; }
+.youtube i { color: #ff0000; }
+.tiktok i { color: #25f4ee; }
 
-.discord {
-  background: #5865f2;
-}
+.instagram:hover { background: linear-gradient(135deg, #fd1d1d, #833ab4); }
+.discord:hover { background: linear-gradient(135deg, #5865f2, #404eed); }
+.youtube:hover { background: linear-gradient(135deg, #ff0000, #cc0000); }
+.tiktok:hover { background: linear-gradient(135deg, #25f4ee, #000000); }
 
-.youtube {
-  background: #ff0000;
-}
-
-.tiktok {
-  background: #000;
+.btn a:hover i,
+.btn a:hover .text p,
+.btn a:hover .text span {
+  color: #ffffff;
 }
 
 /* ================= FOOTER ================= */
 .container-footer {
   margin-top: auto;
-  padding: 20px;
-  font-size: 0.8rem;
-  color: #9ca3af;
+  padding: 20px 0;
+  font-size: 13px;
+  color: var(--muted);
+  opacity: 0.85;
 }
 
-/* ================= ANIMATION ================= */
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .container-intro h1 {
+    font-size: 22px;
+  }
+
+  .profile img {
+    width: 100px;
+    height: 100px;
+  }
 }
