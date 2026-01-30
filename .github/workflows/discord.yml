@@ -10,40 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send notification to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          REPO: ${{ github.repository }}
+          ACTOR: ${{ github.actor }}
+          BRANCH: ${{ github.ref_name }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          COMMIT_URL: ${{ github.event.head_commit.url }}
         run: |
-          curl -X POST \
+          curl -X POST "$WEBHOOK" \
           -H "Content-Type: application/json" \
-          -d '{
-            "username": "GitHub",
-            "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-            "embeds": [
+          -d "{
+            \"username\": \"GitHub\",
+            \"embeds\": [
               {
-                "title": "🚀 New Push to Repository",
-                "url": "${{ github.event.head_commit.url }}",
-                "description": "**${{ github.event.head_commit.message }}**",
-                "color": 3447003,
-                "fields": [
-                  {
-                    "name": "📦 Repository",
-                    "value": "${{ github.repository }}",
-                    "inline": true
-                  },
-                  {
-                    "name": "🌿 Branch",
-                    "value": "${{ github.ref_name }}",
-                    "inline": true
-                  },
-                  {
-                    "name": "👤 Author",
-                    "value": "${{ github.actor }}",
-                    "inline": true
-                  }
-                ],
-                "footer": {
-                  "text": "GitHub Actions → Discord"
-                },
-                "timestamp": "${{ github.event.head_commit.timestamp }}"
+                \"title\": \"🚀 New Push\",
+                \"url\": \"$COMMIT_URL\",
+                \"description\": \"$COMMIT_MSG\",
+                \"color\": 3447003,
+                \"fields\": [
+                  {\"name\": \"📦 Repo\", \"value\": \"$REPO\", \"inline\": true},
+                  {\"name\": \"🌿 Branch\", \"value\": \"$BRANCH\", \"inline\": true},
+                  {\"name\": \"👤 Author\", \"value\": \"$ACTOR\", \"inline\": true}
+                ]
               }
             ]
-          }' \
-          ${{ secrets.Discord_Webhook }}
+          }"
